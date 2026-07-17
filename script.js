@@ -71,7 +71,7 @@ function selectPlan(plan,price){
 function startPaymentTimer(){
     const button=document.getElementById("paidButton");
 
-    let time=25;
+    let time=20;
 
     button.disabled=true;
     button.textContent=`Scan QR First (${time})`;
