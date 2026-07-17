@@ -51,6 +51,11 @@ function calculate(){
 
         display.dataset.result=result;
 
+        if(sessionStorage.getItem("premiumUnlocked")){
+            display.value=result;
+            return;
+        }
+
         document.getElementById("premiumModal").style.display="flex";
 
     }catch{
@@ -59,15 +64,19 @@ function calculate(){
 }
 
 function selectPlan(plan,price,qr){
-document.getElementById("premiumModal").style.display="none";
+    if(sessionStorage.getItem("premiumUnlocked")){
+        return;
+    }
 
-document.getElementById("paymentModal").style.display="flex";
+    document.getElementById("premiumModal").style.display="none";
 
-document.getElementById("selectedPlan").textContent=`${plan} Plan - ₱${price}`;
+    document.getElementById("paymentModal").style.display="flex";
 
-document.querySelector(".qr").src=qr;
+    document.getElementById("selectedPlan").textContent=`${plan} Plan - ₱${price}`;
 
-startPaymentTimer();
+    document.querySelector(".qr").src=qr;
+
+    startPaymentTimer();
 }
 
 function startPaymentTimer(){
@@ -109,6 +118,8 @@ function finishPayment(){
 
 function closePrank(){
     document.getElementById("prankModal").style.display="none";
+
+    sessionStorage.setItem("premiumUnlocked","true");
 
     const display=document.getElementById("display");
 
