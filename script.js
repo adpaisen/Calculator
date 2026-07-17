@@ -1,6 +1,13 @@
+let resultDisplayed=false;
+
 function appendValue(value){
     const display=document.getElementById("display");
     const lastChar=display.value.slice(-1);
+
+    if(resultDisplayed){
+        display.value="";
+        resultDisplayed=false;
+    }
 
     if(value==="."){
         const parts=display.value.split(/[\+\-\*\/]/);
@@ -21,6 +28,7 @@ function appendValue(value){
 
 function clearDisplay(){
     document.getElementById("display").value="";
+    resultDisplayed=false;
 }
 
 function backspace(){
@@ -53,6 +61,7 @@ function calculate(){
 
         if(sessionStorage.getItem("premiumUnlocked")){
             display.value=result;
+            resultDisplayed=true;
             return;
         }
 
@@ -112,7 +121,6 @@ function finishPayment(){
         document.getElementById("verifyModal").style.display="none";
 
         document.getElementById("prankModal").style.display="flex";
-
     },3000);
 }
 
@@ -124,6 +132,7 @@ function closePrank(){
     const display=document.getElementById("display");
 
     display.value=display.dataset.result;
+    resultDisplayed=true;
 }
 
 const toggle=document.getElementById("modeToggle");
