@@ -5,8 +5,14 @@ function appendValue(value){
     const lastChar=display.value.slice(-1);
 
     if(resultDisplayed){
-        display.value="";
-        resultDisplayed=false;
+
+        if(["+","-","*","/","%"].includes(value)){
+            resultDisplayed=false;
+        }else{
+            display.value="";
+            resultDisplayed=false;
+        }
+
     }
 
     if(value==="."){
